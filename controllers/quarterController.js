@@ -226,7 +226,7 @@ exports.index = function(req, res) {
 };
 
 exports.quarter_list_get= function(req, res){
-    res.render('quarter_list', {title: 'Quarters List'})
+    res.render('quarter_list', {title: 'Quarters List', role: req.session.role})
 };
 
 exports.quarter_list_post= function(req, res, next){
@@ -238,7 +238,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'false'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -248,7 +248,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'true'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -258,7 +258,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'false', 'alloted': 'true'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -268,7 +268,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Ok'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role })
             
         });
 
@@ -278,7 +278,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Under Maintenance'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -288,7 +288,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Abandoned'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -298,7 +298,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Demolished'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -308,7 +308,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find().populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -323,7 +323,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'false'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -333,7 +333,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'true'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -343,7 +343,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'occupied': 'false', 'alloted': 'true'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role })
             
         });
 
@@ -353,7 +353,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Ok'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -363,7 +363,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Under Maintenance'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -373,7 +373,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Abandoned'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -383,7 +383,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find({'status': 'Demolished'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -393,7 +393,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         Quarter.find().where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
-            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters  })
+            res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
         });
 
@@ -431,7 +431,7 @@ exports.quarter_detail = function(req, res) {
 
 // Display Quarter create form on GET.
 exports.quarter_create_get = function(req, res, next) {
-    res.render('createquarter_form', {title: 'Create a Quarter'});
+    res.render('createquarter_form', {title: 'Create a Quarter', role: req.session.role});
 };
 
 // Handle Quarter create on POST.
@@ -453,7 +453,7 @@ exports.quarter_create_post = [
 
         if(!errors.isEmpty()){
 
-            res.render('createquarter_form', {title: 'Create a Quarter', errors: errors.array()});
+            res.render('createquarter_form', {title: 'Create a Quarter', errors: errors.array(), role: req.session.role});
         }
 
 
@@ -478,7 +478,7 @@ exports.quarter_create_post = [
             if(results)
         {
             console.log(results);
-            res.render('createquarter_form', {title: 'Create a Quarter', warning: 'This quarter already exists!'});
+            res.render('createquarter_form', {title: 'Create a Quarter', warning: 'This quarter already exists!', role: req.session.role});
         }
 
         else
@@ -488,7 +488,7 @@ exports.quarter_create_post = [
             if(err) { return next(err);
             }
 
-            res.render('createquarter_form', {title: 'Create a Quarter', message: 'Created Successfully!'});
+            res.render('createquarter_form', {title: 'Create a Quarter', message: 'Created Successfully!', role: req.session.role});
         });
         }
 
@@ -519,7 +519,7 @@ exports.quarter_edit_get = function(req, res, next) {
        //console.log(results.quarter.order_date_formatted);
         // Successful, so render.
        // console.log(results.quarter.residency_record[1].order_date_formatted);
-        res.render('quarter_edit', { title: results.quarter.name, data: results.quarter } );
+        res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, role: req.session.role } );
     });
 };
 
@@ -560,7 +560,7 @@ exports.quarter_edit_post =
             //validation before insertion/updation/deletion
             if(!errors.isEmpty()){
 
-                res.render('quarter_edit', {title: results.quarter.name, data: results.quarter, errors: errors.array()});
+                res.render('quarter_edit', {title: results.quarter.name, data: results.quarter, errors: errors.array(), role: req.session.role});
             }
             
             //middleware-validation passed
@@ -587,7 +587,7 @@ exports.quarter_edit_post =
      
                      if(results1==null)
                      {
-                         res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee ID/Pension ID does not exist' } );
+                         res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee ID/Pension ID does not exist', role: req.session.role } );
                      }
  
                      //means found the employee id/pension id from prosixmaster collections
@@ -670,7 +670,7 @@ exports.quarter_edit_post =
                                                      {
                                                          if(err) return next(err);
          
-                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role } );
          
                                                      });
                                                    
@@ -748,7 +748,7 @@ exports.quarter_edit_post =
                                                      {
                                                          if(err) return next(err);
          
-                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role } );
          
                                                      });
                                                    
@@ -835,7 +835,7 @@ exports.quarter_edit_post =
                                              {
                                                  if(err) return next(err);
  
-                                                 res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                 res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role} );
  
                                              });
                                    
@@ -855,7 +855,7 @@ exports.quarter_edit_post =
                     //do not allow
                     else
                     {
-                        res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'You must vacate this quarter before assigning fresh!' } );
+                        res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'You must vacate this quarter before assigning fresh!', role: req.session.role } );
                     }
 
 
@@ -874,7 +874,7 @@ exports.quarter_edit_post =
      
                      if(results1==null)
                      {
-                         res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee ID/Pension ID does not exist' } );
+                         res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee ID/Pension ID does not exist', role: req.session.role } );
                      }
  
                      //means found the employee id/pension id from prosixmaster collections
@@ -987,7 +987,7 @@ exports.quarter_edit_post =
                                                      {
                                                          if(err) return next(err);
          
-                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                         res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role } );
          
                                                      });
                                                    
@@ -1022,7 +1022,7 @@ exports.quarter_edit_post =
                                  //if upon insertion that employee has already a quarter alloted, then do not allow
                                  if(results5.quarter_alloted===true)
                                  {  flag=true;
-                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted'});
+                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted', role: req.session.role});
                                  }
 
                                  else
@@ -1109,7 +1109,7 @@ exports.quarter_edit_post =
                                                         {
                                                             if(err) return next(err);
             
-                                                            res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                            res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role } );
             
                                                         });
                                                       
@@ -1230,7 +1230,7 @@ exports.quarter_edit_post =
                                              {
                                                  if(err) return next(err);
  
-                                                 res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully' } );
+                                                 res.render('quarter_edit', { title: results1.quarter.name, data: results1.quarter, success:'Entered Successfully', role: req.session.role } );
  
                                              });
                                    
@@ -1335,7 +1335,7 @@ exports.quarter_edit_post =
     
     
                                      
-                                             res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully' } );
+                                             res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully', role: req.session.role } );
                                      
                                           }
                                      
@@ -1405,7 +1405,7 @@ exports.quarter_edit_post =
     
     
                                      
-                                             res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully' } );
+                                             res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully', role: req.session.role } );
                                      
                                           }
                                      
@@ -1482,7 +1482,7 @@ exports.quarter_edit_post =
 
 
                                  
-                                         res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully' } );
+                                         res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Deleted Successfully', role: req.session.role } );
                                  
                                       }
                                  
@@ -1630,7 +1630,7 @@ exports.quarter_edit_post =
                                             
                                                     if(err) return next(err);
                                             
-                                                    res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully' } );
+                                                    res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully', role: req.session.role } );
                                             
                                                  }
                                             
@@ -1652,7 +1652,7 @@ exports.quarter_edit_post =
 
                                 if(!req.body.vacantdate)
                                 {   flag=true;
-                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'You must vacate this quarter before assigning to else'});
+                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'You must vacate this quarter before assigning to else', role: req.session.role});
                                 }
 
                                 else
@@ -1719,7 +1719,7 @@ exports.quarter_edit_post =
                                             
                                                     if(err) return next(err);
                                             
-                                                    res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully' } );
+                                                    res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully', role: req.session.role } );
                                             
                                                  }
                                             
@@ -1762,7 +1762,7 @@ exports.quarter_edit_post =
                                 if(results1.resident.quarter_alloted===true)
                                 {
                                     flag=true;
-                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted'});
+                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted', role: req.session.role});
                                 }
 
                                 else
@@ -1806,7 +1806,7 @@ exports.quarter_edit_post =
                                 if(results1.resident.quarter_alloted===true && flag===false)
                                 {
                                     flag=true;
-                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted'});
+                                    res.render('quarter_edit', { title: results.quarter.name, data: results.quarter, warning:'This Employee/Pensioner already has a quarter alloted', role: req.session.role});
                                 }
 
                                 else
@@ -1854,7 +1854,7 @@ exports.quarter_edit_post =
                                 
                                         if(err) return next(err);
                                 
-                                        res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully' } );
+                                        res.render('quarter_edit', { title: results2.quarter.name, data: results2.quarter, success:'Saved Successfully', role: req.session.role } );
                                 
                                      }
                                 

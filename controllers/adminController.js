@@ -14,7 +14,7 @@ var from='BSPHCL';
 //var spice_success=[];
 
 exports.test_get= function(req, res){
-    res.render('admin_playground', {title: 'Send Bulk SMS'})
+    res.render('admin_playground', {title: 'Send Bulk SMS', role: req.session.role})
 };
 
 exports.test_post= [
@@ -50,7 +50,7 @@ exports.test_post= [
             {
                 console.log(i);
                 clearInterval(interval);
-                res.send({title: 'Admin1 Playground', failed: spice_error.length, total: req.body.number.length });
+                res.send({title: 'Admin1 Playground', failed: spice_error.length, total: req.body.number.length, role: req.session.role });
             }
 
             

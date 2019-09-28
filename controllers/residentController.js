@@ -24,7 +24,7 @@ exports.resident_detail = function(req, res, next) {
 
            // console.log(results1[0].designation);
 
-            res.render('resident_detail', { title: results.resident.prosixname, data: results.resident, data1: results1 } );
+            res.render('resident_detail', { title: results.resident.prosixname, data: results.resident, data1: results1, role: req.session.role } );
             
         });
 

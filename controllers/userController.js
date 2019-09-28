@@ -17,7 +17,7 @@ exports.signup_post= function(req, res, next){
 
             if(results===null)
             {
-                res.render('createuser', {title: 'Users', error: 'Can not find the specified employee ID'});
+                res.render('createuser', {title: 'Users', error: 'Can not find the specified employee ID', role: req.session.role});
             }
 
             else
@@ -36,11 +36,11 @@ exports.signup_post= function(req, res, next){
                       });
                       user.save().then(
                         () => {
-                           res.render('createuser', {title: 'Users', success: 'User Added Sucessfully'});
+                           res.render('createuser', {title: 'Users', success: 'User Added Sucessfully', role: req.session.role});
                         }
                       ).catch(
                         (error) => {
-                            res.render('createuser', {title: 'Users', warning: error});
+                            res.render('createuser', {title: 'Users', warning: error, role: req.session.role});
                         }
                       );
                     }
@@ -69,7 +69,7 @@ exports.signup_post= function(req, res, next){
 
 
 exports.signup_get= function(req, res) {
-    res.render('createuser', {title: 'Users'});
+    res.render('createuser', {title: 'Users', role: req.session.role});
 
 };
 
@@ -83,7 +83,7 @@ exports.login_get= function(req, res){
         {
             if(!req.session || results===null)
             {
-              res.render('loginpage');
+              res.render('loginpage', {role: req.session.role});
             }
             
             else if (req.session && String(req.session.user) === String(results._id)) 
@@ -96,7 +96,7 @@ exports.login_get= function(req, res){
             else 
             
             {
-              res.render('loginpage');
+              res.render('loginpage', {role: req.session.role});
 
             }
         }
@@ -110,20 +110,20 @@ exports.login_post= function(req, res, next) {
   User.findOne({ username: req.body.username }).then(
     (user) => {
       if (!user) {
-        res.render('loginpage', {error: 'Incorrect User Name/Password'});
+        res.render('loginpage', {error: 'Incorrect User Name/Password', role: req.session.role});
       }
       else {
         bcrypt.compare(req.body.password, user.password).then(
           (valid) => {
             if (!valid) {
-              res.render('loginpage', {error: 'Incorrect User Name/Password'});
+              res.render('loginpage', {error: 'Incorrect User Name/Password', role: req.session.role});
             }
             else {
               //console.log(user);
               req.session.user = user._id;
               req.session.role=user.role;
               req.session.save(function(err){
-                if(err){res.render('loginpage', {error: err});}
+                if(err){res.render('loginpage', {error: err, role: req.session.role});}
 
                 else
                 {
@@ -137,14 +137,14 @@ exports.login_post= function(req, res, next) {
           }
         ).catch(
           (error) => {
-            res.render('loginpage', {error: error});
+            res.render('loginpage', {error: error, role: req.session.role});
           }
         );
       }
     }
   ).catch(
     (error) => {
-      res.render('loginpage', {error: error});
+      res.render('loginpage', {error: error, role: req.session.role});
     }
   );
 
