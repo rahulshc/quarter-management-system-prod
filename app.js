@@ -5,12 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
+var compression=require('compression');
+var helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var qmsRouter = require('./routes/qms');
 
 var app = express();
+app.use(helmet());
 
 
 
@@ -35,6 +38,7 @@ store.on('error', function(error) {
   console.log(error);
 });
 
+app.use(compression());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
