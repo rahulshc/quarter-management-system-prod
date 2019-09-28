@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='quarter') Quarter Type
+      select#quarter.form-control(type='select' placeholder='Select quarter type' name='quarter' required='true')
+       option(value='All') All
+       option(value='A') A
+       option(value='B') B
+       option(value='C') C
+       option(value='D') D
+       option(value='E') E
+       option(value='F') F
+       option(value='G') G
+       option(value='H') H
+       option(value='OH') OH
+    div.form-group
+      label(for='state') Quarter Status
+      select#state.form-control(type='select' placeholder='Select Status' name='state' required='true')
+       option(value='All') All
+       option(value='vacant') Vacant
+       option(value='occupied') Occupied
+       option(value='alloted') Alloted
+       option(value='Ok') Ok
+       option(value='Under Maintenance') Under Maintenance
+       option(value='Abandoned') Abandoned
+       option(value='Demolished') Demolished
+
+    button.btn.btn-primary(type='submit') Submit
+    br
+    br
+    
+    if data
+      div.row
+       each documents in data
+        -documents.residency_record.sort(function(a, b) {let x = a.date_of_allotment; let y = b.date_of_allotment; return (x < y) ? -1 : (x > y) ? 1 : 0;});
+          if documents.occupied
+            
+             div.col-sm-3
+              div.card.shadow-sm.text-center
+               div.card-header.bg-primary
+                h4.my-0.font-weight-normal.text-white=documents.name
+               div.card-body
+                if documents.residency_record[documents.residency_record.length-1].resident.prosixname
+                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.prosixname}
+                 p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].occupancy_date_formatted}
+                else
+                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.name}
+                 p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].occupancy_date_formatted}
+                 
+               a.button.btn.btn-lg.btn-block.btn-outline-primary(href=documents.url) Details
+
+          else if documents.alloted
+           div.col-sm-3
+             div.card.shadow-sm.text-center
+              div.card-header.bg-danger
+               h4.my-0.font-weight-normal.text-white=documents.name
+              div.card-body
+               if documents.residency_record[documents.residency_record.length-1].resident.prosixname
+                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.prosixname}
+                 p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].allotment_date_formatted}
+               else
+                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.name}
+                 p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].allotment_date_formatted}
+              a.button.btn.btn-lg.btn-block.btn-outline-primary(href=documents.url) Details
+          
+          else
+           div.col-sm-3
+             div.card.shadow-sm.text-center
+              div.card-header.bg-success
+               h4.my-0.font-weight-normal.text-white=documents.name
+              div.card-body
+               h5.card-title='Vacant'
+               p.card-text='vacant'
+              a.button.btn.btn-lg.btn-block.btn-outline-primary(href=documents.url) Details
+    

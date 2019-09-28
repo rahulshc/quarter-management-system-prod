@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='quarter') Quarter Sub-Type
+      select#quarter.form-control(type='select' placeholder='Select quarter type' name='quarter' required='true')
+       option(value='A') A
+       option(value='B(Old)') B(Old)
+       option(value='B(New)') B(New)
+       option(value='C(Old)') C(Old)
+       option(value='C(New)') C(New)
+       option(value='C(CAB)') C(CAB)
+       option(value='C(PTC)') C(PTC)
+       option(value='D(Old)') D(Old)
+       option(value='D(New)') D(New)
+       option(value='D(CAB)') D(CAB)
+       option(value='D(PTC)') D(PTC)
+       option(value='E(Old)') E(Old)
+       option(value='E(New)') E(New)
+       option(value='E(CAB)') E(CAB)
+       option(value='E(PTC)') E(PTC)
+       option(value='F(Old)') F(Old)
+       option(value='F(CAB)') F(CAB)
+       option(value='F(PTC)') F(PTC)
+       option(value='F(HUDCO)') F(HUDCO)
+       option(value='G(PTC)') G(PTC)
+       option(value='H(Old)') H(Old)
+       option(value='H(CAB)') H(CAB)
+       option(value='H(HUDCO)') H(HUDCO)
+       option(value='OH') OH
+
+       
+       
+
+
+    div.form-group
+      label(for='number') Number
+      input#number.form-control(type='number' placeholder='Quarter Number' name='number' required='true')
+
+    button.btn.btn-primary(type='submit') Submit
+    br
+    br
+
+  if errors 
+    for error in errors
+      div.alert.alert-danger(role='alert')=error.msg
+  else if warning
+   div.alert.alert-warning(role='alert')=warning
+  else if message
+   div.alert.alert-success(role='alert')=message
+    

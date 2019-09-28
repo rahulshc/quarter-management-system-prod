@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous')
+    //-script(src='/javascripts/test.js')
+    
+    
+    link(rel='stylesheet', href='/stylesheets/loginpagestyle.css')
+    
+  body.text-center
+   form.form-signin(method='POST' action='')
+    img.mb-4(src='/images/bsphcllogo.png' alt='' width='150' height='150')
+    h1.h3.mb-3.font-weight-normal Please sign in
+    label.sr-only(for='username') User Name
+    input#username.form-control(type='text' placeholder='User Name' name='username' required='true' autofocus='')
+    label.sr-only(for='password') Password
+    input#password.form-control(type='password' placeholder='Password' name='password' required='true')
+    .checkbox.mb-3
+     label
+      input(type='checkbox' value='remember-me')
+      |  Remember me
+    if error
+     p.alert.alert-danger(role='alert')=error
+    else if warning
+     p.alert.alert-danger(role='alert')=warning
+    else if success
+     p.alert.alert-success(role='alert')=success
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+
+   

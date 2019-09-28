@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1=title
+  h6 Employee Id: #{data.name}
+  h6 Designation: #{data1.designation}
+  h6 Current Location: #{data1.curr_location}
+  h6 Current Location HRA Type: #{data1.curr_location_hra_type}
+  h6 Actual Retirement Date: #{data1.date_of_actual_retirement}
+  h6 Last Maintenance Charge Deduction Amount: #{data1.last_maint_charge_deducted_amount}
+
+
+  div.container
+  br
+  if data.occupancy_record
+   table.table.table-hover
+    thead
+     tr
+      th Quarter
+      th Order No
+      th Order Date
+      th Allotment Date
+      th Occupied Since
+      th Vacated On
+      th Comments
+      th 
+      th
+    each document in data.occupancy_record
+     tbody
+      tr
+       td
+        a#col0(href=document.quarter.url) #{document.quarter.name}
+       td#col1 #{document.order_no}
+       td#col2 #{document.order_date_formatted}
+       td#col3 #{document.allotment_date_formatted}
+       td#col4 #{document.occupancy_date_formatted}
+       td#col5 #{document.vacant_date_formatted}
+       td#col6 #{document.comments}
+       

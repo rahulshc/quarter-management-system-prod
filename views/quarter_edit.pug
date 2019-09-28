@@ -1,0 +1,132 @@
+extends layout
+
+block content
+  h1=title
+
+  br
+  
+
+  div.container
+  br
+  if data.residency_record
+   table.table.table-hover
+    thead
+     tr
+      th Name
+      th Order No
+      th Order Date
+      th Occupied Since
+      th Extended up to
+      th Vacated On
+      th Comments
+      th 
+      th
+    each document in data.residency_record
+     tbody
+      tr
+       td#col0(hidden) #{document._id}
+       td#col1(hidden) #{document.resident.type}
+       td#col2(hidden) #{document.resident._id}
+       td
+        if document.resident.prosixname
+         a#col3(href=document.resident.url) #{document.resident.prosixname}
+        else
+         a#col3 #{document.resident.name}
+       td#col4 #{document.order_no}
+       td#col5 #{document.order_date_formatted}
+       td#col6 #{document.occupancy_date_formatted}
+       td#col7 #{document.extend_up_to_formatted}
+       td#col8 #{document.vacant_date_formatted}
+       td#col9 #{document.comments}
+       td#col10(hidden) #{document.resident.name}
+       td
+        a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#exampleModal' onclick='update(this)') Edit
+       td
+        a.button.btn.btn-danger.text-white(data-toggle='modal' data-target='#exampleModal1' onclick='remove(this)') Delete
+  
+  p 
+   br
+   br
+   a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#exampleModal' onclick='insert()') Add a Resident
+
+  script(src='/javascripts/test.js')
+  #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+     .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Add/Modify a Resident
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(method='POST' action='')
+         div.form-group
+         label(for='signal' hidden) Signal
+         input#signal.form-control(type='text' placeholder='' name='signal' hidden)
+         div.form-group
+         label(for='id3' hidden) ID
+         input#id3.form-control(type='text' placeholder='' name='id3' hidden)
+         div.form-group
+         label(for='id4' hidden) ID
+         input#id4.form-control(type='text' placeholder='' name='id4' hidden)
+         div.form-group
+         label(for='type') Resident Type
+         select#type.form-control(type='select' placeholder='Select Resident Type' name='type' required='true')
+           option(value='' id='employee') 
+           option(value='' id='pensioner') 
+           option(value='' id='others') 
+         div.form-group
+         label(for='name') Employee ID/Pension ID/Others Name
+         input#name.form-control(type='text' placeholder='Enter an Employee ID/Pension ID/Name' name='name' required='true')
+         div.form-group
+         label(for='orderno') Order No
+         input#orderno.form-control(type='text' placeholder='order no' name='orderno')
+         div.form-group
+         label(for='orderdate') Order Date
+         input#orderdate.form-control(type='date' placeholder='order date' name='orderdate')
+         div.form-group
+         label(for='occupieddate') Occupied Since
+         input#occupieddate.form-control(type='date' placeholder='Occupied Since' name='occupieddate' )
+         div.form-group
+         label(for='extendupto') Extended up to
+         input#extendupto.form-control(type='date' placeholder='Extended up to' name='extendupto' )
+         div.form-group
+         label(for='vacantdate') Vacated On
+         input#vacantdate.form-control(type='date' placeholder='Vacant Date' name='vacantdate')
+         div.form-group
+         label(for='comments') Comments
+         textarea#comments.form-control(type='text' placeholder='Comments' name='comments')
+         hr
+         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+         button.btn.btn-primary.float-right(type='submit') Save changes
+  
+  #exampleModal1.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel1' aria-hidden='true')
+    .modal-dialog(role='document')
+     .modal-content
+      .modal-header
+        h5#exampleModalLabel1.modal-title Delete a resident record
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(method='POST' action='')
+         div.form-group
+         label(for='signal1' hidden) Signal
+         input#signal1.form-control(type='text' placeholder='' name='signal1' hidden)
+         div.form-group
+         label(for='id1' hidden) ID
+         input#id1.form-control(type='text' placeholder='' name='id1' hidden)
+         div.form-group
+         label(for='id2' hidden) ID
+         input#id2.form-control(type='text' placeholder='' name='id2' hidden)
+         p Are you sure to delete this record?
+         hr
+         button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
+         button.btn.btn-danger.float-right(type='submit') Delete
+ 
+  
+  if errors 
+   div.alert.alert-danger(role='alert')=errors[0].msg
+  else if warning
+   div.alert.alert-warning(role='alert')=warning
+  else if success
+   div.alert.alert-success(role='alert')=success
+  

@@ -1,0 +1,1 @@
+SET DEBUG=quarter-management-system:* & npm run devstart

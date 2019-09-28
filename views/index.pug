@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  h1(align='center') #{title}
+  br
+  br
+
+  if error
+    p Error getting Quarter and residents rcord.
+  
+  
+  br
+  if (data && counts)
+   table.table.table-sm.table-hover.table-bordered
+    thead
+     tr.table-primary(align='right')
+      th TYPE
+      th OCCUPIED
+      th VACANT
+      th ALLOTED BUT UNOCCUPIED
+      th TOTAL
+    each document in data
+     tbody
+      tr.table-light(align='right')
+       td #{document.type}
+       td #{document.occupied}
+       td #{document.vacant}
+       td #{document.alloted}
+       td #{document.total}
+    thead
+    each document in counts
+     tr.table-success(align='right')
+      th TOTAL
+      th #{document.occupied}
+      th #{document.vacant}
+      th #{document.alloted}
+      th #{document.sum}
+
+       

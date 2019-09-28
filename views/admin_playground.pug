@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js')
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+    label(for='message') Message
+    textarea#message.form-control(type='text' placeholder='Draft a message' name='message')
+    div.form-group
+    label(for='input') Upload File
+    input#input.form-control(type='file' placeholder='Upload Excel File' name='input' onchange='display()')
+    div.form-group
+    label(for='data' hidden) Message
+    textarea#data.form-control(type='text' placeholder='Draft a message' name='data' hidden)
+    br
+    br
+    button.btn.btn-primary(type='button' onclick='AJAXSubmit(this)') Send
+    br
+    br
+    p#response
+
+  script(src='/javascripts/filetest.js')

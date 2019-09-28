@@ -1,0 +1,155 @@
+extends layout
+
+block content
+  h1=title
+
+  br
+  
+
+  div.container
+  br
+  if data
+   table.table.table-hover
+    thead
+     tr
+      th Username
+      th Employee ID
+      th Name
+      th Mobile Number
+      th Role
+      th Status
+      th Comments
+      th 
+      th
+    each document in data
+     tbody
+      tr
+       td#col0(hidden) #{document._id}
+       td#col1 #{document.username}
+       td#col2 #{document.empid}
+       td#col3 #{document.name}
+       td#col4 #{document.mobilenumber}
+       td#col5 #{document.role}
+       td#col6 #{document.status}
+       td#col7 #{document.comments}
+       td
+        a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#updateModal' onclick='updateuser(this)') Edit
+       td
+        a.button.btn.btn-danger.text-white(data-toggle='modal' data-target='#deleteModal' onclick='removeuser(this)') Delete
+  
+  p 
+   br
+   br
+   a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#insertModal' onclick='insertuser()') Add a User
+
+  script(src='/javascripts/createuser.js')
+  #insertModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='insertModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+     .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Add a User
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(method='POST' action='')
+         div.form-group
+         label(for='signal' hidden) Signal
+         input#signal.form-control(type='text' placeholder='' name='signal' hidden)
+         div.form-group
+         label(for='username' ) User Name
+         input#username.form-control(type='text' placeholder='Type a Username' name='username' required='true')
+         div.form-group
+         label(for='password' ) Password
+         input#password.form-control(type='password' placeholder='Enter a Password' name='password' minlength=8, maxlength=12,  required='true')
+         div.form-group
+         label(for='empid' ) Employee ID
+         input#empid.form-control(type='text' placeholder='Whom to assign?' name='empid' required='true')
+         div.form-group
+         label(for='mobilenumber' ) Mobile Number
+         input#mobilenumber.form-control(type='number' placeholder='10 digit mobile number for OTP' name='mobilenumber' required='true')
+         div.form-group
+         label(for='role') Role
+         select#role.form-control(type='select' placeholder='Select Role' name='role' required='true')
+           option(value='admin' id='admin') Admin
+           option(value='hr' id='hr') HR
+           option(value='accounts' id='accounts') Accounts
+         label(for='status') Status
+         select#status.form-control(type='select' placeholder='Select Role' name='status' required='true')
+           option(value='active' id='active') Active
+           option(value='inactive' id='inactive') Inactive
+         div.form-group
+         label(for='comments') Comments
+         textarea#comments.form-control(type='text' placeholder='Comments' name='comments')
+         hr
+         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+         button.btn.btn-primary.float-right(type='submit') Save changes
+  
+  #updateModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='updateModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+     .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Modify a User
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(method='POST' action='')
+         div.form-group
+         label(for='signal1' hidden) Signal
+         input#signal1.form-control(type='text' placeholder='' name='signal' hidden)
+         div.form-group
+         label(for='objectid1' hidden) Object ID
+         input#objectid1.form-control(type='text' placeholder='' name='objectid1' hidden)
+         div.form-group
+         label(for='username1' ) User Name
+         input#username1.form-control(type='text' placeholder='' name='username1' required='true')
+         div.form-group
+         label(for='empid1' ) Employee ID
+         input#empid1.form-control(type='text' placeholder='' name='empid1' required='true')
+         div.form-group
+         label(for='mobilenumber1' ) Mobile Number
+         input#mobilenumber1.form-control(type='number' placeholder='' name='mobilenumber1' required='true')
+         div.form-group
+         label(for='role1') Role
+         select#role1.form-control(type='select' placeholder='Select Role' name='role1' required='true')
+           option(value='' id='admin1') 
+           option(value='' id='hr1') 
+           option(value='' id='accounts1')
+         label(for='status1') Status
+         select#status1.form-control(type='select' placeholder='Select Role' name='status1' required='true')
+           option(value='' id='active1') 
+           option(value='' id='inactive1') 
+         div.form-group
+         label(for='comments1') Comments
+         textarea#comments1.form-control(type='text' placeholder='Comments' name='comments1')
+         hr
+         button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+         button.btn.btn-primary.float-right(type='submit') Save changes
+
+  #deleteModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+     .modal-content
+      .modal-header
+        h5#exampleModalLabel1.modal-title Delete a resident record
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(method='POST' action='')
+         div.form-group
+         label(for='signal2' hidden) Signal
+         input#signal2.form-control(type='text' placeholder='' name='signal2' hidden)
+         div.form-group
+         label(for='objectid2' hidden) Object ID
+         input#objectid2.form-control(type='text' placeholder='' name='objectid2' hidden)
+         p Are you sure to delete this record?
+         hr
+         button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
+         button.btn.btn-danger.float-right(type='submit') Delete
+ 
+  
+  if errors 
+   div.alert.alert-danger(role='alert')=errors[0].msg
+  else if warning
+   div.alert.alert-warning(role='alert')=warning
+  else if success
+   div.alert.alert-success(role='alert')=success
+  
