@@ -152,12 +152,12 @@ exports.login_post= function(req, res, next) {
 
 exports.logout_get= function(req, res){
   req.session.destroy();
-  res.render('loginpage');
+  res.redirect('/users/login');
 };
 
 exports.logout_post= function(req, res){
   req.session.destroy();
-  res.render('loginpage');
+  res.redirect('/users/login');
 };
 
 
