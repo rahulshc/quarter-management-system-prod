@@ -7,69 +7,181 @@ var bcrypt=require('bcrypt');
 
 var async = require ('async');
 
-exports.signup_post= function(req, res, next){
+exports.signup_post = [
 
-    if(req.body.signal==='insert')
-    {
-        Prosixmaster.findOne({'employeeid': req.body.empid}).exec(function (err, results) 
-        {
-            if (err) { return next(err); }
 
-            if(results===null)
+  (req, res, next)=> {
+
+    User.find({}, function(err, results) {
+      if(err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err});
+      
+      else
+      {
+        if(req.body.signal==='insert')
+        {  
+            Prosixmaster.findOne({'employeeid': req.body.empid}).exec(function (err, results1) 
             {
-                res.render('createuser', {title: 'Users', error: 'Can not find the specified employee ID', role: req.session.role});
-            }
+                if (err) 
+                {
+                  
+                   res.render('createuser', {title: 'Users', role: req.session.role, errors: err, data: results});
+                }
 
+                else
+                {
+                  if(results1===null)
+                  {
+                    
+                      res.render('createuser', {title: 'Users', warning: 'Can not find the specified employee ID', role: req.session.role, data: results});
+                  }
+
+                  else
+                  {
+
+                     User.findOne({'username': req.body.username}).exec(function (err, results2)
+                     {
+                      
+                       if (err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err, data: results});
+
+                      else if(results2!=null) res.render('createuser', {title: 'Users', warning: 'This ID already exists!', role: req.session.role, data: results});
+
+                      else
+                      {
+                        bcrypt.hash(req.body.password, 10).then(
+                          (hash) => {
+                            const user = new User({
+                              username: req.body.username,
+                              password: hash,
+                              empid: req.body.empid,
+                              name: results1.name,
+                              status: req.body.status,
+                              mobilenumber: req.body.mobilenumber,
+                              role: req.body.role,
+                              comments: req.body.comments
+                  
+                            });
+                            user.save().then(
+                              () => {
+      
+                                User.find({}, function(err, results3) {
+                                  if(err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err, data: results});
+                                  
+                                  else res.render('createuser', {title: 'Users', success: 'User Added Sucessfully', role: req.session.role, data: results3});
+                                });
+                                 
+                              }
+                            ).catch(
+                              (error) => {
+                                res.render('createuser', {title: 'Users', role: req.session.role, errors: error, data: results});
+      
+                              }
+                            );
+                          }
+                        );
+                      }
+
+                     });
+                      
+                      
+                  }
+
+                }
+
+            });
+            
+    
+        }
+    
+        else if(req.body.signal1==='update')
+        {
+          User.findById(req.body.objectid1, function(err, results4){
+    
+            if (err)
+            {
+              res.render('createuser', {title: 'Users', errors: err, role: req.session.role, data: results});
+            }
+    
             else
             {
-                bcrypt.hash(req.body.password, 10).then(
-                    (hash) => {
-                      const user = new User({
-                        username: req.body.username,
-                        password: hash,
-                        empid: req.body.empid,
-                        name: results.name,
-                        status: req.body.status,
-                        mobilenumber: req.body.mobilenumber,
-                        role: req.body.role
-            
-                      });
-                      user.save().then(
-                        () => {
-                           res.render('createuser', {title: 'Users', success: 'User Added Sucessfully', role: req.session.role});
-                        }
-                      ).catch(
-                        (error) => {
-                            res.render('createuser', {title: 'Users', warning: error, role: req.session.role});
-                        }
-                      );
-                    }
-                  );
-                
-            }
+              Prosixmaster.findOne({'employeeid': req.body.empid1}).exec(function (err, results5) 
+            {
+              if (err) res.render('createuser', {title: 'Users', errors: err, role: req.session.role, data: results});
 
-        });
-        
+              else
+              {
+                results4.empid=req.body.empid1;
+                results4.name=results5.name;
+               results4.mobilenumber=req.body.mobilenumber1;
+               results4.role=req.body.role1;
+               results4.status=req.body.status1;
+               results4.comments=req.body.comments1;
 
-    }
+               results4.save(function(err)
+               {
+                 if(err) res.render('createuser', {title: 'Users', errors: err, role: req.session.role, data: results});
 
-    else if(req.body.signal==='update')
-    {
+                 else
+                 {
+                  User.find({}, function(err, results6) {
+                    if(err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err, data: results});
+                    
+                    else res.render('createuser', {title: 'Users', success: 'Changes were made Sucessfully', role: req.session.role, data: results6});
+                  });
 
-    }
+                 }
 
-    else if(req.body.signal1==='delete')
-    {
+               });
+              
 
-    }
+              }
 
+              
     
-};
+            });
+            }
+    
+          });
+    
+        }
+    
+        else if(req.body.signal2==='delete')
+        {
+          User.findByIdAndRemove(req.body.objectid2, function(err){
+            if (err) 
+            {
+              
+              res.render('createuser', {title: 'Users', errors: err, role: req.session.role});
+            }
+            
+    
+            else
+            {
+              User.find({}, function(err, results) {
+                if(err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err});
+                
+                else res.render('createuser', {title: 'Users', success: 'Deleted Successfully', role: req.session.role, data: results});
+              });
+            }
+        
+        });
+    
+        }
+
+
+      }
+    }); 
+}
+];
     
 
 
 exports.signup_get= function(req, res) {
-    res.render('createuser', {title: 'Users', role: req.session.role});
+ User.find({}, function(err, results) {
+   if(err) res.render('createuser', {title: 'Users', role: req.session.role, errors: err});
+   
+   else res.render('createuser', {title: 'Users', role: req.session.role, data: results});
+ });
+    
 
 };
 
