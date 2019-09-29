@@ -47,7 +47,7 @@ block content
     .modal-dialog(role='document')
      .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title Add a User
+        h5#insertModalLabel.modal-title Add a User
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
@@ -88,14 +88,14 @@ block content
     .modal-dialog(role='document')
      .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title Modify a User
+        h5#updateModalLabel.modal-title Modify a User
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
         form(method='POST' action='')
          div.form-group
          label(for='signal1' hidden) Signal
-         input#signal1.form-control(type='text' placeholder='' name='signal' hidden)
+         input#signal1.form-control(type='text' placeholder='' name='signal1' hidden)
          div.form-group
          label(for='objectid1' hidden) Object ID
          input#objectid1.form-control(type='text' placeholder='' name='objectid1' hidden)
@@ -111,13 +111,13 @@ block content
          div.form-group
          label(for='role1') Role
          select#role1.form-control(type='select' placeholder='Select Role' name='role1' required='true')
-           option(value='' id='admin1') 
-           option(value='' id='hr1') 
-           option(value='' id='accounts1')
+           option(value='admin' id='admin1') Admin
+           option(value='hr' id='hr1') HR
+           option(value='accounts' id='accounts1') Accounts
          label(for='status1') Status
          select#status1.form-control(type='select' placeholder='Select Role' name='status1' required='true')
-           option(value='' id='active1') 
-           option(value='' id='inactive1') 
+           option(value='active' id='active1') Active
+           option(value='inactive' id='inactive1') Inactive
          div.form-group
          label(for='comments1') Comments
          textarea#comments1.form-control(type='text' placeholder='Comments' name='comments1')
@@ -129,7 +129,7 @@ block content
     .modal-dialog(role='document')
      .modal-content
       .modal-header
-        h5#exampleModalLabel1.modal-title Delete a resident record
+        h5#exampleModalLabel1.modal-title Delete a User
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
@@ -140,7 +140,7 @@ block content
          div.form-group
          label(for='objectid2' hidden) Object ID
          input#objectid2.form-control(type='text' placeholder='' name='objectid2' hidden)
-         p Are you sure to delete this record?
+         p Are you sure to delete this user?
          hr
          button.btn.btn-secondary(type='button' data-dismiss='modal') Cancel
          button.btn.btn-danger.float-right(type='submit') Delete

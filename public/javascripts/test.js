@@ -59,6 +59,10 @@ function update(obj){
     comments.value=col9;
     //console.log(elem1.placeholder);
 
+    var signal1=document.getElementById('signal1');
+    signal1.value='';
+
+
 }
 
 function insert(){
@@ -98,7 +102,8 @@ function insert(){
 
     signal.value='insert';
     
-
+    var signal1=document.getElementById('signal1');
+    signal1.value='';
 
 
 }
@@ -120,6 +125,9 @@ function remove(obj){
     //console.log(id2.value);
     var signal1=document.getElementById('signal1');
     signal1.value='delete';
+
+    var signal=document.getElementById('signal');
+    signal=value='';
 
 }
 

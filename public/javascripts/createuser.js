@@ -25,12 +25,24 @@ function updateuser(obj){
 
     document.getElementById('signal1').value='update';
 
+    var signal=document.getElementById('signal');
+    signal.value='';
+
+    var signal2=document.getElementById('signal2');
+    signal2.value='';
+
 }
 
 function insertuser(){
 
     var signal=document.getElementById('signal');
     signal.value='insert';
+
+    var signal1=document.getElementById('signal1');
+    signal1.value='';
+
+    var signal2=document.getElementById('signal2');
+    signal2.value='';
 
 }
 
@@ -46,6 +58,12 @@ function removeuser(obj){
     //console.log(id.value);
     var signal2=document.getElementById('signal2');
     signal2.value='delete';
+
+    var signal=document.getElementById('signal');
+    signal.value='';
+
+    var signal1=document.getElementById('signal1');
+    signal1.value='';
 
 }
 
