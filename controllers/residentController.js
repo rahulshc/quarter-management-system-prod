@@ -9,7 +9,7 @@ exports.resident_list_post= function(req, res, next){
    
     if(req.body.resident==='All')
     {
-        Resident.find().exec(function(err, list_resident){
+        Resident.find().populate('alloted_quarter').exec(function(err, list_resident){
             if(err) 
             { 
                 res.render('residents', {title: 'Residents',  errors: err, role: req.session.role  });
@@ -17,6 +17,7 @@ exports.resident_list_post= function(req, res, next){
 
             else
             {
+                console.log(list_resident);
                 res.render('residents', {title: 'Residents',  data:list_resident, role: req.session.role  });
             }
            
@@ -26,7 +27,7 @@ exports.resident_list_post= function(req, res, next){
 
     else if(req.body.resident==='Alloted')
     {
-        Resident.find({'quarter_alloted': 'true'}).exec(function(err, list_resident){
+        Resident.find({'quarter_alloted': 'true'}).populate('alloted_quarter').exec(function(err, list_resident){
             if(err) 
             { 
                 res.render('residents', {title: 'Residents',  errors: err, role: req.session.role  });

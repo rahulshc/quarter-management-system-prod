@@ -26,7 +26,8 @@ block content
      tr
       th Name
       th Resident Type
-      th Quarter Alloted
+      th Alloted Status
+      th Alloted Quarter
     each document in data
      tbody
       tr
@@ -41,6 +42,12 @@ block content
           | Yes
         else
           | No
+       td
+        if document.quarter_alloted
+          a(href=document.alloted_quarter.url) #{document.alloted_quarter.name}
+        else
+          | 
+
     
 
     if errors 
