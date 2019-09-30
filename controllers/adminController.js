@@ -32,9 +32,9 @@ exports.test_post= [
             {
                 request('http://smsgateway.spicedigital.in/MessagingGateway/MessagePush?username=' + uid + '&password=' + password +
         '&messageType=text' + '&mobile=' + req.body.number[i].Number + '&senderId=' + from + '&message=' + req.body.message, function (error, response, body) {
-      console.log('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); 
+      //console.log('error:', error); // Print the error if one occurred
+      //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+     // console.log('body:', body); 
 
        if(error!=null)
        {

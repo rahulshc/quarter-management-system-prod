@@ -426,7 +426,7 @@ exports.quarter_list_post= function(req, res, next){
 
 // Display detail page for a specific Quarter.
 exports.quarter_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Quarter detail: ' + req.params.id);
+    res.render('workinprogress', {role: req.session.role});
 };
 
 // Display Quarter create form on GET.
@@ -1896,23 +1896,23 @@ exports.quarter_edit_post =
 
 
 exports.transfer_alert=function(req, res) {
-    res.send('NOT IMPLEMENTED: Transfer Alert');
+    res.render('workinprogress', {role: req.session.role});
 };
 
 exports.retirement_alert=function(req, res){
-    res.send('NOT IMPLEMENTED: Retirement Alert');
+    res.render('workinprogress', {role: req.session.role});
 };
 
 exports.waitlist_get=function(req, res){
-    res.send('NOT IMPLEMENTED: Waitlist Alert GET');
+    res.render('workinprogress', {role: req.session.role});
 };
 
 exports.waitlist_post=function(req, res){
-    res.send('NOT IMPLEMENTED: Waitlist Alert Post');
+    res.render('workinprogress', {role: req.session.role});
 };
 
 exports.export_data=function(req, res){
-    res.send('NOT IMPLEMENTED: Export Data')
+    res.render('workinprogress', {role: req.session.role});
 };
 
 
