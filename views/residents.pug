@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  h1=title
+
+  br
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='resident') Allotment Type
+      select#resident.form-control(type='select' placeholder='Select allotment type' name='resident' required='true')
+       option(value='All') All
+       option(value='Alloted') Currently Alloted
+       option(value='Unalloted') Currently Unalloted
+
+    button.btn.btn-primary(type='submit') Submit
+    br
+    br
+  
+
+  div.container
+  br
+  if data
+   table.table.table-hover
+    thead
+     tr
+      th Name
+      th Resident Type
+      th Quarter Alloted
+    each document in data
+     tbody
+      tr
+       td
+        if document.prosixname
+         a(href=document.url) #{document.prosixname}
+        else
+         a(href=document.url) #{document.name}
+       td #{document.type}
+       td
+        if document.quarter_alloted 
+          | Yes
+        else
+          | No
+    
+
+    if errors 
+      div.alert.alert-danger(role='alert')=errors[0].msg

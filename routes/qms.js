@@ -27,7 +27,9 @@ router.post('/quarters', auth, quarter_controller.quarter_list_post);
 router.get('/quarter/:id', auth, quarter_controller.quarter_detail);
 
 
-router.get('/residents', auth, resident_controller.resident_list);
+router.get('/residents', auth, resident_controller.resident_list_get);
+
+router.post('/residents', auth, resident_controller.resident_list_post);
 
 router.get('/resident/:id', auth, resident_controller.resident_detail);
 

@@ -263,13 +263,22 @@ exports.login_post= function(req, res, next) {
 };
 
 exports.logout_get= function(req, res){
-  req.session.destroy();
-  res.redirect('/users/login');
+  req.session.destroy(function(err) {
+    // cannot access session here
+    if(err) res.send(err);
+
+    else res.redirect('/users/login');
+  });
+  
 };
 
 exports.logout_post= function(req, res){
-  req.session.destroy();
-  res.redirect('/users/login');
+  req.session.destroy(function(err) {
+    // cannot access session here
+    if(err) res.send(err);
+
+    else res.redirect('/users/login');
+  });
 };
 
 

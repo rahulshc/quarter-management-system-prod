@@ -5,8 +5,65 @@ var Prosixmaster=require('../models/prosixmaster');
 var async = require ('async');
 
 
-exports.resident_list= function(req, res){
-    res.send('NOT IMPLEMENTED: Resident List');
+exports.resident_list_post= function(req, res, next){
+   
+    if(req.body.resident==='All')
+    {
+        Resident.find().exec(function(err, list_resident){
+            if(err) 
+            { 
+                res.render('residents', {title: 'Residents',  errors: err, role: req.session.role  });
+            }
+
+            else
+            {
+                res.render('residents', {title: 'Residents',  data:list_resident, role: req.session.role  });
+            }
+           
+            
+        });
+    }
+
+    else if(req.body.resident==='Alloted')
+    {
+        Resident.find({'quarter_alloted': 'true'}).exec(function(err, list_resident){
+            if(err) 
+            { 
+                res.render('residents', {title: 'Residents',  errors: err, role: req.session.role  });
+            }
+
+            else
+            {
+                res.render('residents', {title: 'Residents',  data:list_resident, role: req.session.role  });
+            }
+           
+            
+        });
+
+    }
+
+    else if(req.body.resident==='Unalloted')
+    {
+        Resident.find({'quarter_alloted': 'false'}).exec(function(err, list_resident){
+            if(err) 
+            { 
+                res.render('residents', {title: 'Residents',  errors: err, role: req.session.role  });
+            }
+
+            else
+            {
+                res.render('residents', {title: 'Residents',  data:list_resident, role: req.session.role  });
+            }
+           
+            
+        });
+
+    }
+};
+
+
+exports.resident_list_get= function(req, res){
+   res.render('residents', {title: 'Residents',  role: req.session.role  });
 };
 
 // Display detail page for a specific Resident.
