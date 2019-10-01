@@ -4,8 +4,8 @@ const { sanitizeBody } = require('express-validator/filter');
 var async = require ('async');
 var request = require('request');
  
-var uid=process.env.UID;
-var password=process.env.PASSWORD;
+const uid=process.env.UID;
+const password=process.env.PASSWORD;
 var from='BSPHCL';
 
 
@@ -46,7 +46,7 @@ exports.test_post= [
 
             else
             {
-                console.log(i);
+               // console.log(i);
                 clearInterval(interval);
                 res.send({title: 'Admin1 Playground', failed: spice_error.length, total: req.body.number.length, role: req.session.role });
             }
