@@ -4,7 +4,8 @@ const { sanitizeBody } = require('express-validator/filter');
 var async = require ('async');
 var request = require('request');
  
-
+var uid=process.env.UID;
+var password=process.env.PASSWORD;
 var from='BSPHCL';
 
 
@@ -27,7 +28,7 @@ exports.test_post= [
 
             if(i<req.body.number.length)
             {
-                request('http://smsgateway.spicedigital.in/MessagingGateway/MessagePush?username=' + process.env.UID + '&password=' + process.env.PASSWORD +
+                request('http://smsgateway.spicedigital.in/MessagingGateway/MessagePush?username=' + uid + '&password=' + password +
         '&messageType=text' + '&mobile=' + req.body.number[i].Number + '&senderId=' + from + '&message=' + req.body.message, function (error, response, body) {
       //console.log('error:', error); // Print the error if one occurred
       //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
