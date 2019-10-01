@@ -19,13 +19,13 @@ app.use(helmet());
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://rahul:567184rST@cluster0-fzso9.mongodb.net/qms?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var store = new MongoDBStore({
-  uri: 'mongodb+srv://rahul:567184rST@cluster0-fzso9.mongodb.net/qms?retryWrites=true&w=majority',
+  uri: process.env.MONGODB_URI,
   collection: 'sessions'
 },
 function(error) {
