@@ -31,7 +31,7 @@ block content
         if document.resident.prosixname
          a#col3(href=document.resident.url) #{document.resident.prosixname}
         else
-         a#col3(href=document.resident.url) #{document.resident.name}
+         a#col3(href=document.resident.url) !{document.resident.name}
        td#col4 !{document.order_no}
        td#col5 #{document.order_date_formatted}
        td#col6 #{document.occupancy_date_formatted}

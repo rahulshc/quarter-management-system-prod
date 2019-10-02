@@ -48,7 +48,7 @@ block content
                  h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.prosixname}
                  p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].occupancy_date_formatted}
                 else
-                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.name}
+                 h5.card-title !{documents.residency_record[documents.residency_record.length-1].resident.name}
                  p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].occupancy_date_formatted}
                  
                a.button.btn.btn-lg.btn-block.btn-outline-primary(href=documents.url) Details
@@ -63,7 +63,7 @@ block content
                  h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.prosixname}
                  p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].allotment_date_formatted}
                else
-                 h5.card-title #{documents.residency_record[documents.residency_record.length-1].resident.name}
+                 h5.card-title !{documents.residency_record[documents.residency_record.length-1].resident.name}
                  p.card-text Since: #{documents.residency_record[documents.residency_record.length-1].allotment_date_formatted}
               a.button.btn.btn-lg.btn-block.btn-outline-primary(href=documents.url) Details
           

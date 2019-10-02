@@ -31,7 +31,7 @@ block content
        td#col4 #{document.mobilenumber}
        td#col5 #{document.role}
        td#col6 #{document.status}
-       td#col7 #{document.comments}
+       td#col7 !{document.comments}
        td
         a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#updateModal' onclick='updateuser(this)') Edit
        td
