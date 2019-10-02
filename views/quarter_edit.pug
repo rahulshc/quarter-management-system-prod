@@ -32,12 +32,12 @@ block content
          a#col3(href=document.resident.url) #{document.resident.prosixname}
         else
          a#col3(href=document.resident.url) #{document.resident.name}
-       td#col4 #{document.order_no}
+       td#col4 !{document.order_no}
        td#col5 #{document.order_date_formatted}
        td#col6 #{document.occupancy_date_formatted}
        td#col7 #{document.extend_up_to_formatted}
        td#col8 #{document.vacant_date_formatted}
-       td#col9 #{document.comments}
+       td#col9 !{document.comments}
        td#col10(hidden) #{document.resident.name}
        td
         a.button.btn.btn-primary.text-white(data-toggle='modal' data-target='#exampleModal' onclick='update(this)') Edit
