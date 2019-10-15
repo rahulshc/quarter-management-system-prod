@@ -36,7 +36,7 @@ ResidentSchema
 
 ResidentSchema.path('occupancy_record').schema.virtual('order_date_formatted').get(function() {
   
-    if(this.date_of_order){return moment(this.date_of_order).format('YYYY-MM-DD');}
+    if(this.date_of_order){return moment(this.date_of_order).format('DD-MM-YYYY');}
   
     else
      return '';
@@ -44,7 +44,7 @@ ResidentSchema.path('occupancy_record').schema.virtual('order_date_formatted').g
   
   ResidentSchema.path('occupancy_record').schema.virtual('allotment_date_formatted').get(function() {
   
-    if(this.date_of_allotment){return moment(this.date_of_allotment).format('YYYY-MM-DD');}
+    if(this.date_of_allotment){return moment(this.date_of_allotment).format('DD-MM-YYYY');}
   
     else
      return '';
@@ -52,7 +52,7 @@ ResidentSchema.path('occupancy_record').schema.virtual('order_date_formatted').g
   
   ResidentSchema.path('occupancy_record').schema.virtual('occupancy_date_formatted').get(function() {
   
-    if(this.date_of_occupancy){return moment(this.date_of_occupancy).format('YYYY-MM-DD');}
+    if(this.date_of_occupancy){return moment(this.date_of_occupancy).format('DD-MM-YYYY');}
   
     else
      return '';
@@ -61,7 +61,7 @@ ResidentSchema.path('occupancy_record').schema.virtual('order_date_formatted').g
   
   ResidentSchema.path('occupancy_record').schema.virtual('vacant_date_formatted').get(function() {
   
-    if(this.date_of_vacancy) { return moment(this.date_of_vacancy).format('YYYY-MM-DD');}
+    if(this.date_of_vacancy) { return moment(this.date_of_vacancy).format('DD-MM-YYYY');}
   
     else
      return '';
@@ -69,7 +69,7 @@ ResidentSchema.path('occupancy_record').schema.virtual('order_date_formatted').g
 
   ResidentSchema.path('occupancy_record').schema.virtual('extend_up_to_formatted').get(function() {
   
-    if(this.extend_up_to) { return moment(this.extend_up_to).format('YYYY-MM-DD');}
+    if(this.extend_up_to) { return moment(this.extend_up_to).format('DD-MM-YYYY');}
   
     else
      return '';

@@ -48,10 +48,10 @@ function update(obj){
     pensioner.hidden=true;
     others.hidden=true;
     orderno.value=col4;
-    orderdate.value=col5;
-    occupieddate.value=col6;
-    extendupto.value=col7;
-    vacantdate.value=col8;
+    orderdate.value=moment(moment(col5, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
+    occupieddate.value=moment(moment(col6, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
+    extendupto.value=moment(moment(col7, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
+    vacantdate.value=moment(moment(col8, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
 
     signal.value='update';
 
