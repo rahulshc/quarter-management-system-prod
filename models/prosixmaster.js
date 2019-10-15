@@ -1,4 +1,5 @@
 var mongoose = require ('mongoose');
+var moment = require('moment');
 
 var Schema = mongoose.Schema;
 
@@ -16,5 +17,14 @@ var ProsixmasterSchema= new Schema (
         last_maint_charge_deducted_amount: Number
     }
 );
+
+ProsixmasterSchema.virtual('doar_formatted').get(function() {
+  
+    if(this.date_of_actual_retirement){return moment(this.date_of_actual_retirement).format('DD-MM-YYYY');}
+  
+    else
+     return '';
+  });
+  
 
 module.exports = mongoose.model('Prosixmaster', ProsixmasterSchema);
