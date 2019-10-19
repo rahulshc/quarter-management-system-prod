@@ -30,6 +30,7 @@ function update(obj){
     var employeeid=document.getElementById('name');
     var employee=document.getElementById('employee');
     var pensioner=document.getElementById('pensioner');
+    var familypensioner=document.getElementById('familypensioner');
     var others=document.getElementById('others');
     var signal=document.getElementById('signal');
     var orderno=document.getElementById('orderno');
@@ -47,6 +48,7 @@ function update(obj){
     employee.innerHTML=col1;
     pensioner.hidden=true;
     others.hidden=true;
+    familypensioner.hidden=true;
     orderno.value=col4;
     orderdate.value=moment(moment(col5, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
     occupieddate.value=moment(moment(col6, "DD-MM-YYYY").toDate()).format('YYYY-MM-DD');
@@ -70,6 +72,7 @@ function insert(){
     var employeeid=document.getElementById('name');
     var employee=document.getElementById('employee');
     var pensioner=document.getElementById('pensioner');
+    var familypensioner=document.getElementById('familypensioner');
     var others=document.getElementById('others');
     var id=document.getElementById('id');
     var signal=document.getElementById('signal');
@@ -89,6 +92,9 @@ function insert(){
     pensioner.value='Pensioner';
     pensioner.innerHTML='Pensioner';
     pensioner.hidden=false;
+    familypensioner.value='Family Pensioner';
+    familypensioner.innerHTML='Family Pensioner';
+    familypensioner.hidden=false;
     others.value='Others';
     others.innerHTML='Others';
     others.hidden=false;

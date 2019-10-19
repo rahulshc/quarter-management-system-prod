@@ -7,7 +7,7 @@ var ResidentSchema = new Schema (
     {
         name: {type: String },//name is actually employee id of prosix if the type is Employee or actual name if it is of type others
         prosixname: {type: String},
-        type: {type: String, required: true, enum : ['Employee', 'Pensioner', 'Others']},
+        type: {type: String, required: true, enum : ['Employee', 'Pensioner', 'Family Pensioner', 'Others']},
         quarter_alloted: { type: Boolean, default: false},
         quarter_occupied: { type: Boolean, default: false},
         alloted_quarter: {type: Schema.Types.ObjectId, ref:'Quarter'},
