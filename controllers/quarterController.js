@@ -236,7 +236,7 @@ exports.quarter_list_post= function(req, res, next){
     {
         if(req.body.state==='vacant')
     {
-        Quarter.find({'occupied': 'false'}).populate('residency_record.resident').exec(function(err, list_quarters){
+        Quarter.find({'alloted': 'false'}).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
             res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
@@ -321,7 +321,7 @@ exports.quarter_list_post= function(req, res, next){
 
         if(req.body.state==='vacant')
     {
-        Quarter.find({'occupied': 'false'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
+        Quarter.find({'alloted': 'false'}).where('type').equals(req.body.quarter).populate('residency_record.resident').exec(function(err, list_quarters){
             if(err) { return next(err); }
             res.render('quarter_list', {title: 'Quarters List', errors: err, data:list_quarters, role: req.session.role  })
             
