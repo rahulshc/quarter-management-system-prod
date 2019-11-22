@@ -25,6 +25,7 @@ block content
     thead
      tr
       th Name
+      th Employee/Pension ID
       th Resident Type
       th Alloted Status
       th Alloted Quarter
@@ -36,6 +37,11 @@ block content
          a(href=document.url) #{document.prosixname}
         else
          a(href=document.url) !{document.name}
+       td
+        if document.prosixname
+         a(href=document.url) #{document.name}
+        else
+         |
        td #{document.type}
        td
         if document.quarter_alloted 
