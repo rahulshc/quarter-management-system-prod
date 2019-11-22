@@ -19,10 +19,6 @@ html(lang='en')
     input#username.form-control(type='text' placeholder='User Name' name='username' required='true' autofocus='')
     label.sr-only(for='password') Password
     input#password.form-control(type='password' placeholder='Password' name='password' required='true')
-    .checkbox.mb-3
-     label
-      input(type='checkbox' value='remember-me')
-      |  Remember me
     if error
      p.alert.alert-danger(role='alert')=error
     else if warning
