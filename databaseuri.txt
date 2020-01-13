@@ -1,1 +1,0 @@
-mongodb+srv://rahul:567184rST@cluster0-fzso9.mongodb.net/qms?retryWrites=true&w=majority
